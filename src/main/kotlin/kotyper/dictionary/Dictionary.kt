@@ -2,35 +2,21 @@ package kotyper.dictionary
 
 import kotlin.random.Random
 
-class Dictionary(name: String) {
-    private var name: String = "default dictionary name"
-    private var words: MutableList<String> = ArrayList()
-
-    init {
-        this.name = name
-    }
-
-    fun getRandomWord(): String {
-        val randomIndex = Random.nextInt(words.size)
-        return words[randomIndex]
-    }
-
-    fun getRandomWords(count: Int): List<String> {
-        val wordsList = ArrayList<String>()
-
-        for (i in 0.rangeUntil(count)) {
-            val randomIndex = Random.nextInt(words.size)
-            wordsList.add(words[randomIndex])
-        }
-
-        return wordsList;
-    }
+class Dictionary {
+    val name: String = "default dictionary name";
+    val words: MutableList<String> = ArrayList()
 
     fun getRandomText(count: Int): String {
         val resultBuilder = StringBuilder()
 
-        for (i in 0.rangeUntil(count)) {
-            val randomIndex = Random.nextInt(words.size)
+        var prevWordIndex: Int = -1
+        for (i in 0..<count) {
+            var randomIndex = Random.nextInt(words.size)
+
+            while (prevWordIndex == randomIndex)
+                randomIndex = Random.nextInt(words.size)
+
+            prevWordIndex = randomIndex
 
             resultBuilder.append(words[randomIndex])
             resultBuilder.append(' ')

@@ -4,7 +4,7 @@ import kotlin.time.Duration
 import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 
-class NanoTimer {
+class NanoStopwatch {
     private var startTime: Long = 0
     private var finishTime: Long = 0
 
@@ -24,5 +24,4 @@ class NanoTimer {
     fun getDelta(): Long {
         return finishTime - startTime
     }
-
 }

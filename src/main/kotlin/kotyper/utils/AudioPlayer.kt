@@ -1,24 +1,18 @@
 package kotyper.utils
 
-import java.io.InputStream
+import java.io.BufferedInputStream
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
 
-class AudioPlayer(private val clip: Clip = AudioSystem.getClip()) : Clip by clip {
 
-    private var audioInputStream: AudioInputStream? = null
+class AudioPlayer(resourceName: String, private val clip: Clip = AudioSystem.getClip()) : Clip by clip {
+    private val audioInputStream: AudioInputStream
 
-    constructor(inputStream: InputStream) : this() {
-        println("new constructor еб твою мать блять как так то нахуй")
-        this.audioInputStream = AudioSystem.getAudioInputStream(inputStream)
-        clip.open(audioInputStream)
-    }
-
-    constructor(resourceName: String) : this() {
-        println("2 new constructor еб твою мать блять как так то нахуй")
-        audioInputStream = AudioSystem.getAudioInputStream(this.javaClass.getResourceAsStream(resourceName))
-
+    init {
+        val resourceStream = this.javaClass.getResourceAsStream(resourceName)
+        val bufferedIn = BufferedInputStream(resourceStream!!)
+        audioInputStream = AudioSystem.getAudioInputStream(bufferedIn)
         clip.open(audioInputStream)
 
     }

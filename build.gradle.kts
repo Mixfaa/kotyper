@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "1.9.0"
+    kotlin("jvm") version "1.9.10"
     application
 }
 
@@ -12,9 +12,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("com.beust:klaxon:5.5")
 
-
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.2")
     implementation("io.github.spair:imgui-java-app:1.86.10")
 
 
@@ -30,6 +29,16 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "EntryPointKt"
+    }
+    configurations["compileClasspath"].forEach { file: File ->
+        from(zipTree(file.absoluteFile))
+    }
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
 kotlin {
