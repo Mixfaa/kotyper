@@ -44,22 +44,22 @@ object KotyperGameManager {
                             )
                                 KotyperDictionariesManager.setCurrentDictionary(dictionaryName)
                         }
-                        ImGui.endTabItem();
+                        ImGui.endTabItem()
                     }
                     if (ImGui.beginTabItem("Choose game")) {
                         KotyperGamesManager.gamesList.forEach { game ->
                             if (ImGui.selectable(
-                                    game.javaClass.canonicalName,
+                                    game::class.simpleName,
                                     KotyperGamesManager.currentGame == game
                                 )
                             ) // game.name
                                 KotyperGamesManager.currentGame = game
                         }
 
-                        ImGui.endTabItem();
+                        ImGui.endTabItem()
                     }
 
-                    ImGui.endTabBar();
+                    ImGui.endTabBar()
                 }
 
                 ImGui.treePop()

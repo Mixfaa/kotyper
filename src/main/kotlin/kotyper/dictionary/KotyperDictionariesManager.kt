@@ -6,14 +6,11 @@ import java.util.*
 
 object KotyperDictionariesManager {
     private var dictionaries: HashMap<String, Dictionary> = HashMap()
-
     var currentDictionary: Dictionary? = null
-
     private val resources: List<String> = listOf("/english_5k.json", "/english.json", "/git.json", "/java.json")
 
-    val availableDictionariesNames: MutableSet<String>
-        get() = Collections.unmodifiableSet(dictionaries.keys);
-    
+    val availableDictionariesNames: MutableSet<String> = Collections.unmodifiableSet(dictionaries.keys)
+
     fun loadDictionaries() {
         val objectMapper = ObjectMapper()
 
